@@ -12,13 +12,13 @@ email: lazyeffect1@gmail.com
 #blog logo
 logo: "/assets/images/df_logo.jpg"
 # blog cover
-cover: "/assets/images/cA4aKEIPQrerBnp1yGHv_IMG_9534-3-2.jpg"
+cover: "/assets/images/background.jpg"
 
-name: 'Dirk Fabisch'
-author: 'Dirk Fabisch'
-author_image: "/assets/images/author.jpg"
+name: '구진현'
+author: '구찌'
+author_image: "/assets/images/koo.jpg"
 
-paginate:	5
+paginate: 5
 
 url: "https://koocci.github.io" # the base hostname & protocol for your site
 baseurl: ""
@@ -29,18 +29,18 @@ baseurl: ""
 
 # social icons and sharing options
 social:
-  - icon:	facebook
-    url:	https://www.facebook.com/gu.jinhyun
+  - icon: facebook
+    url:  https://www.facebook.com/gu.jinhyun
     desc: 제 페이스북이예요
 
 
-  - icon:	github
-    url:	https://github.com/dirkfabisch
-    desc:	제 GITHUB 이예요
+  - icon: github
+    url:  https://github.com/koocci
+    desc: 제 GITHUB 이예요
 
-#  - icon:	google-plus
-#    url:	https://google.com/???
-#    desc:	Add me on google+
+#  - icon:  google-plus
+#    url: https://google.com/???
+#    desc:  Add me on google+
 #    share_url:
 #    share_title:
 #    share_link:
