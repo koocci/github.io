@@ -60,7 +60,6 @@ get으로 요청하면 XML형식으로 나온다는 것이다. 아주 직관적�
 
 {% highlight ruby %}
 var request = require('request');
-var cheerio = require('cheerio');
 
 var options = {
 	headers : {
@@ -104,7 +103,6 @@ xml형식으로 하나의 검색된 GS25시가 나온다.
 
 {% highlight ruby %}
 var request = require('request');
-var cheerio = require('cheerio');
 var xml2js = require('xml2js');
 var parser = new xml2js.Parser({
     explicitArray: false
