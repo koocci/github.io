@@ -2,7 +2,7 @@
 layout: post
 title:  "첫 포스트!"
 date:   2016-06-17 02:30:51 +0900
-categories: FREE BOARD
+categories: FreeBoard
 ---
 
 # 첫 포스트
