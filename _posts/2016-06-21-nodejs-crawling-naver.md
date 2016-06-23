@@ -3,6 +3,8 @@ layout: post
 title:  "[node js] Node js로 크롤링하기 -naver API"
 date:   2016-06-21 01:45:23 +0900
 categories: Nodejs
+tags: [node js, node, crawling, 크롤링, 노드]
+
 ---
 
 # Node js로 크롤링 하기 - NAVER API

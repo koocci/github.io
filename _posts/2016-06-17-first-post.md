@@ -7,7 +7,7 @@ categories: FreeBoard
 
 # 첫 포스트
 
-![codding](https://images.unsplash.com/photo-1454165205744-3b78555e5572?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=ca8c08d17555247f7580691500bb5351)
+![coding](https://images.unsplash.com/photo-1454165205744-3b78555e5572?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=ca8c08d17555247f7580691500bb5351)
 **개발자** 로서 이제서야 제대로된 블로그를 만든다는 것이 부끄러운 일이기는 하지만.. 그래도 나름 개발자가 되기로 결심한 이 후로 네이버에서 잠깐잠깐 블로그 만들다가 "역시나 개발자는 **[github](github)** 이지" 하고 이제야 만들게 되었다.
 
 - - -
