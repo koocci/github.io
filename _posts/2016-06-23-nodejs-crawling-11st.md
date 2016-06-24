@@ -1,325 +1,252 @@
 ---
 layout: post
-title:  "[web] jQuery 시작하기"
-date:   2016-06-24 14:51:23 +0900
-categories: WEB
-tags: [WEB,jquery,jquery mobile,jquery UI,library,framework,$,DOM]
+title:  "[node js] Node js로 크롤링하기 -11번가 API"
+date:   2016-06-23 16:18:23 +0900
+categories: Nodejs
+tags: [node js, node, crawling, 크롤링, 노드, 11번가]
 
 ---
 
-# jQuery 시작하기
+# Node js로 크롤링 하기 - 11st
 
-![computer](https://images.unsplash.com/photo-1421757381940-5d269570b21c?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=84969eec38041db4a36565671737b5ba)
+![computer](https://images.unsplash.com/photo-1438354886727-070458b3b5cf?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=9ed9e5f9ea45c8d1d99d71e06c1d99df)
 
-처음 웹을 접하기 시작했을 때 부터, 가장 많이 들었던 라이브러리가 바로 jQuery다.
-무엇보다 jQuery가 많이 언급 되는 이유는 역시 `크로스 브라우져`이다.
-사실 내가 web쪽을 공부하기 시작한건 모바일관련해서 하이브리드 어플도 만들어보고, 실제 런칭도 해보고, 네이티브로도 갈아타 보고.. 또 자바스크립트 관련해서도 딥하게 들어가기 위해서 이리저리 하게 됬는데, jQuery는 자신이 직접 만들던지 뭘하던지 일단 알고는 있어야 할 듯 했다.(워낙 많이 써서 데이터도 많고 어떤 형식으로든 도움이 될 듯했다.)
-
-비슷하게 적용되는 한국 서비스로 네이버에서 만든 `Jindo` 도 있고, 어플을 위해서 `아이오닉`이나 `자마린` 서비스를 이용해볼까도 했지만 역시 기본부터 하자 싶어서 `jQuery`를 선택했다.
+naver에 이어 11번가에 대해 크롤링을 해볼 것이다.
+11번가는 몇가지 기술이 더 들어가므로 재미있을 것이다.
+사실 법적인? 문제가 생길지도 모르기에 API자체만 긁는 기술을 적고 더 세세한 내용은 따로 적어두지 않으려고 한다.
 
 ---
 
-### jQuery란?
+### 11st API
 
-`jQuery is a fast, small, and feature-rich JavaScript library. It makes things like HTML document traversal and manipulation, event handling, animation, and Ajax much simpler with an easy-to-use API that works across a multitude of browsers. With a combination of versatility and extensibility, jQuery has changed the way that millions of people write JavaScript.`
+11번가 api는 메인 이미지도 주고, 상품 번호 등 다양한 정보를 준다.
 
-jQuery에서 공식적으로 설명해 놓은 문구다.
-가장 잘 설명된 문구이기도 하다.
-
-jQuery는 많은 사람들이 쓰는 javascript 라이브러리로 HTML 문서의 여러 형태의 이벤트들을 쉽게 쓸 수 있도록 해준다.
+해당 API 는 [11st api](http://openapi.11st.co.kr/openapi/OpenApiSearch.tmall) 에 들어가면 볼 수 있고, 이전에 naver API와 같이 형식도 나와있으므로 쉽게 접근이 가능하다.
+naver API를 할 때, API 문서를 보는 것부터 차근히 했으므로 바로 진행해 보겠다.
 
 ---
 
-### 라이브러리? 프레임워크?
+### API 요청
 
-많이들 헤깔려하는 단어 두개다.
-라이브러리는 무엇이고 프레임워크는 무엇일까?
-먼저 공식적인 설명을 보자.
+이전과 형태는 비슷하다.
 
-`라이브러리 : 소프트웨어를 만들 때 쓰이는 클래스나 서브루틴들의 모임을 가리키는 말`
-`프레임워크 : 프로그래밍에서 특정 운영 체제를 위한 응용 프로그램 표준 구조를 구현하는 클래스와 라이브러리 모임`
+{% highlight ruby %}
+var request = require('request');
 
-딱 보면 일단 '아! 프레임워크가 라이브러리를 포함하구나!' 라고 생각할 수 있다. 맞는 말이기는 한데 조금 차원이 다르다.
+var options  = { encoding: "utf-8", method: "GET", uri: "http://openapi.11st.co.kr/openapi/OpenApiService.tmall?key=YOURKEY&apiCode=CategoryInfo&categoryCode=127648&option=Products&pageSize=200&pageNum=1"};
 
-아는 강사님께서 처음 나한테 라이브러리와 프레임워크의 차이를 설명해 주셨던 말은 다음과 같다.
+request(options, function(err, res, html) {
+	console.log(html);
+});
+{% endhighlight %}
 
-`라이브러리는 삽이다. 프레임워크는 포크레인이다. 너가 화분에 담을 흙을 퍼담을 때와 건축공사를 하려고 흙을 팔 때를 생각해 보자. 라이브러리는 삽이니까 모종삽으로 만들어서 화분에 흙을 퍼 담아도 되고, 건축공사 할 때는 힘들겠지만 정말 큰 삽을 만들어서 퍼면 되. 하지만 포크레인은 일단 너가 포크레인 사용법을 배워야 하고, 이후에 화분에 흙을 넣든, 건축할때 땅을 파든, 큰 포크레인으로 해야만 하는 거야.`
+요청 쿼리를 option에 넣어서 해주어도 되지만, URL에 넣어주어도 상관 없으므로, 위와 같이 넣어주었다.
+YOUR KEY 값은 11번가 OPEN API를 사용할 때, 가입하는 조건으로 제공이 되며, 내가 선택한 CATEGORY CODE는 건강식품이고, 물품 정보를 받을 것이며, 200개의 리스팅, 그중 1페이지를 가져오는 쿼리이다.
 
-단번에 이해 되었다.
-다른 커뮤니티에 나온 글도 비슷하다. [이곳](https://kldp.org/node/124237)에 가면 쉬운 예시들이 많이 있다.
+그럼 console창을 한번 보길 바란다.
+{% highlight ruby %}
 
-그리고 jQuery는 라이브러리다.
+<?xml version="1.0" encoding="EUC-KR"?><CategoryResponse><Request><Arguments><Argument name="key" value="8eab672e39f8648
+a2a2c92b2b5627085"></Argument><Argument name="apiCode" value="CategoryInfo"></Argument><Argument name="categoryCode" val
+ue="127648"></Argument><Argument name="option" value="Products"></Argument></Arguments><ProcessingTime>0.04 sec</Process
+ingTime></Request><Category><CategoryCode>127648</CategoryCode><CategoryName><![CDATA[�ǰ���ǰ]]></CategoryName></Category
+><Products><TotalCount>216457</TotalCount><Product><ProductCode>1194666535</ProductCode><ProductName><![CDATA[������ ���
+�-����ŰĿ 30��+����ŰĿ ��ư7�� ����/ ���������� �� �ٿ���������]]></ProductName><ProductPrice>22900</ProductPrice><Product
+Image><![CDATA[http://i.011st.com/t/080/am/6/6/6/5/3/5/1194666535_L300_V24.jpg]]></ProductImage><ProductImage100><![CDAT
+A[http://i.011st.com/t/100/am/6/6/6/5/3/5/1194666535_L300_V24.jpg]]></ProductImage100><ProductImage110><![CDATA[http://i
+.011st.com/t/110/am/6/6/6/5/3/5/1194666535_L300_V24.jpg]]></ProductImage110><ProductImage120><![CDATA[http://i.011st.com
+/t/120/am/6/6/6/5/3/5/1194666535_L300_V24.jpg]]></ProductImage120><ProductImage130><![CDATA[http://i.011st.com/t/130/am/
+6/6/6/5/3/5/1194666535_L300_V24.jpg]]></ProductImage130><ProductImage140><![CDATA[http://i.011st.com/t/140/am/6/6/6/5/3/....
+
+{% endhighlight %}
+
+어떤가? 분명 이전과 같은 형식으로 해주었는데, 코드가 깨져 나온다.
+이유가 뭘까? 당연히 인코딩 문제다.
 
 ---
 
-### jQuery를 시작해 보자.
+### ENCODING
 
-먼저, html 문서를 간단히 만들자. (해당 예시는 html5로 제작되었다.)
+흔히 인코딩 문제를 직면할 경우에 다음과 같이 깨져서 나오는 건 자명하다.
+물론, 해당 URL을 검색할 때는 잘 보이는 것을 확인 할 수 있다.
+그럼 인코딩 문제를 해결해 보자.
 
-{% highlight ruby %}
+사실 처음 11번가를 접했을 때, 좀 고생했던 부분이다. 뭐 몇시간 노닥거린 수준이긴 하지만 크롤링에 익숙치 않았던 나로써는 검색을 열심히 할 수 밖에 없었다.
 
-<!DOCTYPE html>
-<html>
-<meta charset="utf-8">
-<head>
-	<title>jQuery 시작하기</title>
-	<script src="http://code.jquery.com/jquery.min.js"></script>
-</head>
-<body>
-	<h1>안녕</h1>
-</body>
-</html>
+위 콘솔에 찍힌 결과를 보자.
 
-{% endhighlight %}
+`EUC-KR` 라는 인코딩 상황이 떡 하니 보일 것이다.
 
-간단히 안녕이라는 단어를 h1태그에 넣어 보여주는 뷰이다. 중요한것은 jquery 선언인데, 위와 같이 스크립트로 jquery를 선언하면 된다.
+그럼 EUC-KR을 UTF-8으로 바꾸는 작업이 필요하다. 잠깐 검색해 보아도, Iconv라는 모듈의 정보를 쉽게 접할 수 있을 것이다.
 
-이와 같이 link를 이용해 jquery를 선언 하는 것을 `CDN`이라고 하며 정확하기 말해서 `Contents Delibery Network`다.
-
-실제로 사용은 보통, CDN 선언으로 개발을 하고, 후에 배포작업시에 필요한 부분에 해당하는 것들만 다운받아 저장하는 방식이다.
-
-위 예시의 경우는 단순히 선언 방식이며, 아직 jQuery를 사용하진 않은 것이다.
-그럼 이제 스크립트에서 jQuery를 사용해 보도록 하자.
-간단히 셀렉터를 볼 것이다.
+그럼 적용을 해보자.
 
 {% highlight ruby %}
 
-<!DOCTYPE html>
-<html>
-<meta charset="utf-8">
-<head>
-	<title>jQuery 시작하기</title>
-	<script src="http://code.jquery.com/jquery.min.js"></script>
-</head>
-<body>
-	<h1 id="test-id" >안녕</h1>
-	<script type="text/javascript">
-		console.log($("#test-id"));
-		console.log(document.getElementById("test-id"))
-	</script>
-</body>
-</html>
+var request = require('request');
+var Iconv = require('iconv').Iconv;
+var euckr2utf8 = new Iconv('EUC-KR', 'UTF-8');
 
-{% endhighlight %}
+var options  = { encoding: "utf-8", method: "GET", uri: "http://openapi.11st.co.kr/openapi/OpenApiService.tmall?key=YOURKEY&apiCode=CategoryInfo&categoryCode=127648&option=Products&pageSize=1&pageNum=1"};
 
-위 소스를 보면, `jQuery`와 `HTML DOM Method` 형식, 두가지로 같은 변수를 지칭해두었다.
+request(options, function(err, res, html) {
 
-둘은 같은 의미지만 위 `$` 문자가 들어간 것이 jQuery의 선언법이다.
-작은 차이지만 후에는 매우 크게 느껴진다.
-
-그런데 왜 스크립트를 body 내부에 선언해 두었을까?
-그것은 호출 순서 때문이다.
-다음을 보자.
-
-{% highlight ruby %}
-
-<!DOCTYPE html>
-<html>
-<meta charset="utf-8">
-<head>
-	<title>jQuery 시작하기</title>
-	<script src="http://code.jquery.com/jquery.min.js"></script>
-    	<script type="text/javascript">
-		console.log($("#test-id"));
-		console.log(document.getElementById("test-id"))
-	</script>
-</head>
-<body>
-	<h1 id="test-id" >안녕</h1>
-</body>
-</html>
-
-{% endhighlight %}
-
-위 예시의 결과를 보자.
-
-아마 jQuery는 실행이 되지만, getElementById는 `null`로 처리가 되어 나올 것이다.
-
----
-
-### 실행순서
-
-이왕 하는 김에 스크립트 실행 순서도 같이 한번 알아보자.
-
-{% highlight ruby %}
-
-<!DOCTYPE html>
-<html>
-<meta charset="utf-8">
-<head>
-	<title>jQuery 시작하기</title>
-	<script src="http://code.jquery.com/jquery.min.js"></script>
-	<script type="text/javascript">
-		console.log("1")
-		console.log($("#test-id"));
-		console.log(document.getElementById("test-id"))
-	</script>
-	<script type="text/javascript" src="./test2.js"></script>
-	<script type="text/javascript">
-		console.log("3")
-		console.log($("#test-id"));
-		console.log(document.getElementById("test-id"))
-	</script>
-	<script type="text/javascript" src="./test4.js"></script>
-</head>
-<body>
-	<script type="text/javascript">
-		console.log("5")
-		console.log($("#test-id"));
-		console.log(document.getElementById("test-id"))
-	</script>
-	<h1 id="test-id" >안녕</h1>
-	<script type="text/javascript">
-		console.log("6")
-		console.log($("#test-id"));
-		console.log(document.getElementById("test-id"))
-	</script>
-</body>
-</html>
-
-{% endhighlight %}
-
-위와 같이 하고, test2.js,test4.js 에는
-
-{% highlight ruby %}
-
-console.log("2")
-console.log($("#test-id"));
-console.log(document.getElementById("test-id"))
-
-console.log("4")
-console.log($("#test-id"));
-console.log(document.getElementById("test-id"))
-
-{% endhighlight %}
-
-를 넣어 주었다.
-
-그럼 결과를 확인해보자.
-
-뭐 역시나.. 1,2,3,4,5,6 순서로 나오고, 6의 경우만 getElementById 값이 나온다.
-
-이로서 스크립트 실행이 어떻게 되는지 알 수 있고, 6의 경우만 getElementById가 실행됨을 봐서, 해당 실행 중 HTML보다 먼저 id호출이 실행이 되면 인식하지 못함을 알 수 있었다.
-
-그렇다면 jQuery는 어떻길래 해당사항이 실행되는 것일까?
-
-속내를 보도록 하자.
-
-위 코드를 다음과 같이 바꿔보도록 한다.
-
-
-{% highlight ruby %}
-
-<!DOCTYPE html>
-<html>
-<meta charset="utf-8">
-<head>
-	<title>jQuery 시작하기</title>
-	<script src="http://code.jquery.com/jquery.min.js"></script>
-	<script type="text/javascript">
-		console.log("1")
-		console.log($("#test-id")[0]);
-		console.log(document.getElementById("test-id"))
-	</script>
-	<script type="text/javascript" src="./test2.js"></script>
-	<script type="text/javascript">
-		console.log("3")
-		console.log($("#test-id")[0]);
-		console.log(document.getElementById("test-id"))
-	</script>
-	<script type="text/javascript" src="./test4.js"></script>
-</head>
-<body>
-	<script type="text/javascript">
-		console.log("5")
-		console.log($("#test-id")[0]);
-		console.log(document.getElementById("test-id"))
-	</script>
-	<h1 id="test-id" >안녕</h1>
-	<script type="text/javascript">
-		console.log("6")
-		console.log($("#test-id")[0]);
-		console.log(document.getElementById("test-id"))
-	</script>
-</body>
-</html>
-
-{% endhighlight %}
-
-위와 같이 하고, test2.js,test4.js 에는
-
-{% highlight ruby %}
-
-console.log("2")
-console.log($("#test-id")[0]);
-console.log(document.getElementById("test-id"))
-
-console.log("4")
-console.log($("#test-id")[0]);
-console.log(document.getElementById("test-id"))
-
-{% endhighlight %}
-
-를 실행시켜 보자.
-
-결과가 어떠한가? 아마 둘다 undefined와 null로 나올 것이다.(6번 실행은 같은 값이 나올것이고, 실행순서는 당연히 차이가 없다.)
-코드의 변화는 단 하나 `[0]`값이다.
-즉, $라는 문자는 jquery객체 자체를 말하며, 해당 아이디의 값은 배열로서 [0]에 저장이 된다는 사실을 알 수 있었고, 처음 [0]이 붙기 전에는 jquery 객체를 지정함으로써 처음 보는 사람은 값이 있구나! 라고 착각할 수도 있지만 사실 속으론 아무 값도 (undefined) 없게 된 것이다.
-물론 [0]를 붙인 값이나 getElementById 값은 HTML DOM 객체를 지정하므로서 실행 순서에 따라 값이 없다고 지칭이 되는 것이다.
-
-그렇다면 어떻게 스크립트 내에서 실행을 할까?
-
----
-
-
-![computer](https://images.unsplash.com/photo-1453799527828-cf1bd7b2f682?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=4660f9591de335c3f6a5e83c45fbac88)
-
-
-### jQuery ready vs load
-
-jQuery를 쓸 때면, `$(document).ready` 라는 함수를 참 많이 쓰게 된다.
-혹여나 jQuery를 쓰지 않는다면 `window.load`라는 함수를 쓰게 되는데, 흔히 둘은 같다고 착각할 수가 있다. 
-
-사실은 실행순서에 차이가 있다.
-
-순서는 다음과 같다.
-
-`사용자 웹 출력요청 - 브라우져 웹 read  - DOM 생성 - 이미지, script 생성 - 로드 완료`
-
-여기서 ready 함수는 DOM생성 직후에 실행이 되지만 load는 무든 로드가 완료된 후 실행 된다.
-
-따라서 ready 함수와 같은 식으로 쓰려면 사실
-
-{% highlight ruby %}
-
-document.addEventListener("DOMContentLoaded", function(event) { 
-    //Do work
+	var result = euckr2utf8.convert(html);
+    //var result = euckr2utf8.convert(html).toString();
+	console.log(result);
 });
 
 {% endhighlight %}
 
-와 같은 형식의 함수를 사용해야 하는데, 잘 쓰지는 않는 듯 하다.
+위와 같이 했을 때 콘솔에 무엇이 나오는지 보자.
 
-하여튼 우리가 위의 예시에서 console의 출력을 가져오려면 ready나 load함수를 선언하고 그 내부에 적어주어야 제대로 실행이 된다.
+역시나 안된다.
+
+그럼 스트링으로 고치면 되는 걸까?
+
+주석을 풀고 진행해보자..
+
+역시나 깨지면서 나온다..
+
+다른 여러가지 방법을 해보았지만 단순히 이런 변환을 통해서는 크게 찾지못했다.
+
+그 이유는 get 요청에 있다.
+
+요청시 binary로 요청을 해야 EUC-KR문서가 UTF-8으로 변환이 된다.
+
+사실 포스팅 하면서 그 이유를 찾아보았는데, 그 이유가 설명된 곳은 찾지 못했다.
+
+게다가 아무것도 모를 때는 찾을 때 굉장히 힘들었는데, 지금 찾으니 10초만에 찾아지는 놀라움...
+
+하여튼 binary로 변환을 해보자.
+
+{% highlight ruby %}
+
+var request = require('request');
+var Iconv = require('iconv').Iconv;
+var euckr2utf8 = new Iconv('EUC-KR', 'UTF-8');
+
+var options  = { encoding: "binary", method: "GET", uri: "http://openapi.11st.co.kr/openapi/OpenApiService.tmall?key=YOURKEY&apiCode=CategoryInfo&categoryCode=127648&option=Products&pageSize=1&pageNum=1"};
+
+request(options, function(err, res, html) {
+
+	var contents = new Buffer(html, 'binary'); //인코딩 변환
+	var result = euckr2utf8.convert(contents).toString()
+    //var result = euckr2utf8.convert(html).toString();
+	console.log(result);
+});
+
+{% endhighlight %}
+
+보면 갑자기 Buffer가 생긴걸 볼수 있다.
+node.js는 버퍼구조내에 바이너리 데이터를 생성하고 읽고, 쓰고, 조작하기 위한 Buffer 모듈을 제공한다. 전역적으로 선언 되기 때문에, require도 필요가 없다.
+
+버퍼를 왜 쓸까?
+
+자바스크립트 자체는 유니코드에 친화적이지만 바이너리 데이터에는 별로 좋지 않다. TCP 스트림이나 파일시스템을 다룰 때 옥텟(octet) 스트림을 다룰 필요가 있다. Node에는 옥텟 스트림을 조작하고, 생성하고, 소비하는 여러 전략이 있다. 
+
+출처 : [여기](http://nodejs.sideeffect.kr/docs/v0.8.20/api/buffer.html)
+
+따라서 저 옥텟 스트림을 다루기 위해 버퍼가 필요했고, binary 데이터를 올바르게 읽어드릴 수 있게 되었다.
 
 ---
 
-### $
+### IFRAME
 
-조금 얘기가 다른 방향으로 빠진 듯 하지만 분명 중요한 것들이니 적어 두었다.
-자 이제 $라는 것을 알게 되었다.....
-근데 이게 뭘까? jQuery에서 쓰는 것???...
+자 이제 값이 보인다!
 
-정확한 명칭은 `DOM 엘리먼트셀렉터` 이다.
-이전에 우리가 했던 것들을 보면 그 이유를 알 수 있다.
-document라던지, id등은 DOM의 element들이다. (document도 document의 하나의 node다.)
-[여기](http://www.w3schools.com/jsref/dom_obj_all.asp)를 보면 잘 정리가 되어 있다.
+그런데!!
 
-아이디를 지칭할 때 우리는 $("#id")와 같이 선언하였다.
-클래스는 $(".class") 와 같다.
-어디선가 보았다.
-그렇다 `css`에서도 위 예시처럼 사용을 한다.
+해당 물품의 이미지는 잘 보이지만 그 물품을 설명해 놓은 이미지는 API로 제공이 안된다.
+따라서, 해당 물품번호로 찾아 들어가서 이미지를 긁으려 해보니...
 
-이처럼 사용성이 굉장히 높다.
+IFRAME 내부에 해당하는 이미지가 놓여져 있다.
 
-오늘의 포스팅은 여기까지 하고, 셀렉터,속성,이벤트 등은 다음 포스팅에 이어서 하겠다.
+IFRAME 내부를 긁을 방법은 없을까??
+
+한번 해보자.
+{% highlight ruby %}
+
+var request = require('request');
+var Iconv = require('iconv').Iconv;
+var euckr2utf8 = new Iconv('EUC-KR', 'UTF-8');
+var cheerio = require('cheerio');
+var xml2js = require('xml2js');
+var parser = new xml2js.Parser({
+    explicitArray: false
+});
+
+var options  = { encoding: "binary", method: "GET", uri: "http://openapi.11st.co.kr/openapi/OpenApiService.tmall?key=YOURKEY&apiCode=CategoryInfo&categoryCode=127648&option=Products&pageSize=1&pageNum=1"};
+
+request(options, function(err, res, html) {
+
+	var contents = new Buffer(html, 'binary');
+	var result_encoding = euckr2utf8.convert(contents).toString();
+	parser.parseString(result_encoding, function(err, result) {
+		var product = result.CategoryResponse.Products.Product;
+		var subRequest = { encoding: "binary", method: "GET", uri: product.DetailPageUrl}
+
+		request(subRequest, function(err,res,html2){
+			var strContents = new Buffer(html2, 'binary');
+	    strContents = euckr2utf8.convert(strContents).toString();
+  		var $ = cheerio.load(strContents);
+  		console.log($("#prdDescIfrm"));
+		});
+	});
+});
+
+{% endhighlight %}
+
+코드가 길어졌다.
+
+이전에 설명했던 cheerIO도 썼고,xml2js도 사용했고 parser로 string 값을 변환도 해주었다.
+그리고 내부에서 해당 물품에 접근 하기 위해 request도 한번 더 써주었다.
+
+iframe에 접근해 보면 알 것이다. 내부 크롤링을 하려고 하면, 값이 나오질 않는다..
+
+iframe 특성상 내부에 내부 html이 있는 형태로 접근이 힘든 것이다.
+
+그럼 긁을 수 없는 것일까?
+
+나도 많이 생각을 해봤지만 (다른 툴을 쓴다면 할 수 있을지도 모르지만,) 가장 쉬운 방법은 iframe에 해당하는 URL을 가져오는 것이 가장 쉽다.
+
+해당 사항은 불법적인 역할이 될 수 있다고 판단되서 따로 URL을 적거나 하진 않겠지만 iframe도 접근이 불가능 한 것은 아니다.
+
+이상으로 11번가 포스팅은 마치도록 하겠다.
+
+---
+
+### 추가
+
+사실 얼마전에 지인이 크롤링에 대해 물어본 것이 있다.
+
+URL에 접근을 하는데, 한 5초쯤 있다가 redirect 된다고 한다. 그 redirect되는 곳을 크롤링 하고 싶다는데..
+
+듣고 나서 redirect가 왜 5초나 걸리지? 라는 생각을 했다. 물론 로딩속도가 걸린다거나 시간을 줄순 있지만 해당 뷰는 그런 상황은 아닌 듯 했다.
+
+스크립트를 대충 훑어보니... 역시나 redirect가 아니라 javascript로 redirect처럼 보이도록 실행을 해두었다.
+
+해당사항은 사실 크롤링하기가 상당히 까다롭다.
+
+대강 알아보니 Phantom.js라는 걸 써서 따와야 한다고 한다. (나도 아직 안해봤다)
+
+시간이 있을 때 한번 해보도록 해야겠다.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
