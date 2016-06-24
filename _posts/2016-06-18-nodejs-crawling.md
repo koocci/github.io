@@ -1,13 +1,9 @@
 ---
 
 layout: post
-
 title:  "[node js] Node js로 크롤링하기"
-
 date:   2016-06-20 03:24:23 +0900
-
 categories: Nodejs
-
 tags: [node js, node, crawling, 크롤링, 노드]
 
 ---
