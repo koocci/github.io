@@ -1,44 +1,26 @@
 ---
-
 layout: post
 title:  "[node js] Node js로 크롤링하기"
 date:   2016-06-20 03:24:23 +0900
 categories: Nodejs
 tags: [node js, node, crawling, 크롤링, 노드]
-
 ---
-
-
 
 # Node js로 크롤링 하기
 
-
-
 ![computer](https://images.unsplash.com/photo-1444201716572-c60ec66d0494?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=d6a55446d98a28cb8c23bd6b2fa64af0)
-
-
 
 첫 포스트는 **Node js**로 **크롤링(crawling)**하기이다.
 
 사실 Node js설치부터 이것저것 기초적인 것도 좋지만 그런것은 이미 많으니... 내가 열심히 찾으면서 했던 것들을 공유해 보고자 한다.
 
-
-
 먼저 **크롤링**이 무엇일까 부터 알아보자.
-
-
 
 ---
 
-
-
 ### CRAWLING
 
-
-
 `크롤링[crawling] : 무수히 많은 컴퓨터에 분산 저장되어 있는 문서를 수집하여 검색 대상의 색인으로 포함시키는 기술.`
-
-
 
 처음 내가 크롤링에 대한 설명을 들었을 때 **내가 하려는 게 이 크롤링인가?** 싶었다.
 
