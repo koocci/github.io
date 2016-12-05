@@ -159,13 +159,13 @@ Angular 파일은 자기가 원하는 대로 지원하자.
 
       ...
       <body class="well" ng-controller="todoCtrl">
-        <h1>{{appName}}</h1>
+        <h1>{ {appName} }</h1>
 
         ...
 
         <ul class="list-unstyled">
           <li class="checkbox" ng-repeat="todo in todoList">
-            <input type="checkbox" ng-model= "todo.done" />{{todo.title}}
+            <input type="checkbox" ng-model= "todo.done" />{ {todo.title} }
           </li>
         </ul>
 
@@ -209,7 +209,7 @@ Angular 파일은 자기가 원하는 대로 지원하자.
 
     ...
 
-      전체 할 일 <string>{{todoList.length}}</string>개 / 남은 할일은 <string>{{remain()}}</string>개
+      전체 할 일 <string>{ {todoList.length} }</string>개 / 남은 할일은 <string>{ {remain()} }</string>개
       <a href="" ng-click="archive()">보관하기</a>
     </p>
 
