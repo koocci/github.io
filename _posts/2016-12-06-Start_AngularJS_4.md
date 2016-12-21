@@ -48,10 +48,10 @@ tags: [Angularjs, 프로그래밍, MEAN stack, 기초, 블루프린트, IONIC]
       </head>
       <body>
         <div ng-controller="parentCtrl">
-          <h1>부모 이름 : {{parent.name}}</h1>
+          <h1>부모 이름 : { { parent.name } }</h1>
           <div ng-controller="childCtrl">
-            <h2>부모 이름 : {{parent.name}}</h2>
-            <h2>자식 이름 : {{child.name}}</h2>
+            <h2>부모 이름 : { { parent.name } }</h2>
+            <h2>자식 이름 : { { child.name } }</h2>
             <button ng-click="changeParentName()">부모이름변경</button>
           </div>
         </div>
@@ -215,7 +215,7 @@ Angular 에서는 웹 애플리케이션에 애플리케이션 이벤트를 정�
         <div class="msg-list-area" ng-controller="chatMsgListCtrl">
           <ul>
             <li ng-repeat="msg in msgList track by $index">
-              {{msg}}
+              { {msg} }
             </li>
           </ul>
         </div>
@@ -353,7 +353,7 @@ Angular 에서는 웹 애플리케이션에 애플리케이션 이벤트를 정�
       <body ng-controller="mainCtrl">
         <h1>Cookie 서비스 사용</h1>
         <p>
-          test 키로 저장된 값 : {{value}}
+          test 키로 저장된 값 : { {value} }
         </p>
         <button ng-click="getValue()">쿠키가져오기</button>
         <br />
