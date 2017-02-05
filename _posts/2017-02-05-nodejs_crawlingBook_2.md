@@ -34,20 +34,20 @@ CasperJS는 아까 말한대로 PhantomJS 를 쉽게 사용하기 위한 라이�
 
 ``` javascript
 
-    // 웹사이트 타이틀을 표시하는 프로그램
+// 웹사이트 타이틀을 표시하는 프로그램
 
-    var TARGET_URL = 'http://jpub.tistory.com';
+var TARGET_URL = 'http://jpub.tistory.com';
 
-    // CasperJS 객체 생성
-    var casper = require('casper').create();
+// CasperJS 객체 생성
+var casper = require('casper').create();
 
-    //웹 사이트 열기
-    casper.start(TARGET_URL, function(){ // 실제 실행은 아님. 방문할 URL 지정 페이지 로드시 수행할 콜백함수 지정
-    //타이틀 출력
-    this.echo(casper.getTitle()); //페이지 로드 후, 실행 접속한 사이트 제목을 취득 후 출력
-    });
+//웹 사이트 열기
+casper.start(TARGET_URL, function(){ // 실제 실행은 아님. 방문할 URL 지정 페이지 로드시 수행할 콜백함수 지정
+//타이틀 출력
+this.echo(casper.getTitle()); //페이지 로드 후, 실행 접속한 사이트 제목을 취득 후 출력
+});
 
-    casper.run(); //실제 실행
+casper.run(); //실제 실행
 
 ```
 
@@ -64,25 +64,25 @@ CasperJS는 아까 말한대로 PhantomJS 를 쉽게 사용하기 위한 라이�
 
 ``` javascript
 
-    // 스크린샷
+// 스크린샷
 
-    var TARGET_URL = 'http://jpub.tistory.com';
+var TARGET_URL = 'http://jpub.tistory.com';
 
-    // CasperJS 객체 생성
-    var casper = require('casper').create();
+// CasperJS 객체 생성
+var casper = require('casper').create();
 
-    // 개시
-    casper.start();
+// 개시
+casper.start();
 
-    casper.open(TARGET_URL);
+casper.open(TARGET_URL);
 
-    // 스크린샷 수행
-    casper.then(function(){
-    casper.capture("screenshot.png");
-    });
+// 스크린샷 수행
+casper.then(function(){
+casper.capture("screenshot.png");
+});
 
-    //실행
-    casper.run(); //실제 실행
+//실행
+casper.run(); //실제 실행
 
 ```
 
@@ -94,35 +94,35 @@ CasperJS는 아까 말한대로 PhantomJS 를 쉽게 사용하기 위한 라이�
 
 ``` javascript
 
-    // 스크린샷 (Flickr)
+// 스크린샷 (Flickr)
 
-    // CasperJS 객체 생성
-    var casper = require('casper').create();
+// CasperJS 객체 생성
+var casper = require('casper').create();
 
-    // 개시
-    casper.start(); // 빈 페이지 준비
+// 개시
+casper.start(); // 빈 페이지 준비
 
-    // 화면 사이트 설정
-    casper.viewport(1400, 800); //브라우저 화면 크기
+// 화면 사이트 설정
+casper.viewport(1400, 800); //브라우저 화면 크기
 
-    //UserAgent 설정
-    casper.userAgent('User-Agent: Mozilla/5,0 (Windows NT 6.1; WOW64) AppleWebKit/537.36(KHTML, like Gecko) Chrome/37.0.2062.120 Safari/537.36');
+//UserAgent 설정
+casper.userAgent('User-Agent: Mozilla/5,0 (Windows NT 6.1; WOW64) AppleWebKit/537.36(KHTML, like Gecko) Chrome/37.0.2062.120 Safari/537.36');
 
-    // 플리커에서 고양이로 검색
+// 플리커에서 고양이로 검색
 
-    var text = encodeURIComponent("고양이");
-    casper.open('https://www.flickr.com/search/?text=' + text);
+var text = encodeURIComponent("고양이");
+casper.open('https://www.flickr.com/search/?text=' + text);
 
 
-    // 스크린샷 수행
-    casper.then(function(){
-      casper.capture("flickr-cat.png", {
-        top:0, left:0, width:1400, height: 800
-      });
-    });
+// 스크린샷 수행
+casper.then(function(){
+  casper.capture("flickr-cat.png", {
+    top:0, left:0, width:1400, height: 800
+  });
+});
 
-    //실행
-    casper.run(); //실제 실행
+//실행
+casper.run(); //실제 실행
 
 ```
 
@@ -142,32 +142,33 @@ CasperJS는 `start()` `run()` 메소드 사이에 순서대로 실행하고자 �
 
 
 ``` javascript
-    // 스크린샷 (iPhone 모드)
 
-    var TARGET_URL = "http://jpub.tistory.com";
+// 스크린샷 (iPhone 모드)
 
-    // CasperJS 객체 생성
-    var casper = require('casper').create();
+var TARGET_URL = "http://jpub.tistory.com";
 
-    // 개시
-    casper.start(); // 빈 페이지 준비
+// CasperJS 객체 생성
+var casper = require('casper').create();
 
-    // UserAgent 설정
-    casper.userAgent('Mozilla/5.0 (iPhone; CPU iPhone OS 7_0 like Mac OS X)' +
-      'AppleWebKit/537.51.1 (KHTML, like Gecko) Version/7.0 Mobile/11A465 Safari/9537.53');
+// 개시
+casper.start(); // 빈 페이지 준비
 
-    // 화면 사이즈 설정
-    casper.viewport(750, 1334);
+// UserAgent 설정
+casper.userAgent('Mozilla/5.0 (iPhone; CPU iPhone OS 7_0 like Mac OS X)' +
+  'AppleWebKit/537.51.1 (KHTML, like Gecko) Version/7.0 Mobile/11A465 Safari/9537.53');
 
-    casper.open(TARGET_URL);
+// 화면 사이즈 설정
+casper.viewport(750, 1334);
 
-    // 스크린샷 수행
-    casper.then(function(){
-      casper.capture("screenshot.png");
-    });
+casper.open(TARGET_URL);
 
-    //실행
-    casper.run(); //실제 실행
+// 스크린샷 수행
+casper.then(function(){
+  casper.capture("screenshot.png");
+});
+
+//실행
+casper.run(); //실제 실행
 
 ```
 
@@ -228,9 +229,9 @@ casper.run(); //실제 실행
 
 ``` shell
 
-    #!/bin/sh
-    SCRIPT_DIR="$(dirname "$0")"
-    /usr/local/bin/casperjs $SCRIPT_DIR/yourFile.js $*
+#!/bin/sh
+SCRIPT_DIR="$(dirname "$0")"
+/usr/local/bin/casperjs $SCRIPT_DIR/yourFile.js $*
 
 ```
 
