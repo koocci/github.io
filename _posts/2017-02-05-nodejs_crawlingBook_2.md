@@ -166,39 +166,42 @@ CasperJS 에서는 실행 했을 때, 지정한 인자가 `casper.cli.args` 에 
 
 이를 토대로 작성해보자.
 
-    // 스크린샷 (커맨드 입력)
+``` javascript
 
-    // CasperJS 객체 생성
-    var casper = require('casper').create();
-    var utils = require('utils');
+// 스크린샷 (커맨드 입력)
 
-    var args = casper.cli.args;
-    if(args.length < 1){
-      //사용법 표시
-      casper.echo("USES:");
-      casper.echo("shot-tool URL [savepath]");
-      casper.exit();
-    }
+// CasperJS 객체 생성
+var casper = require('casper').create();
+var utils = require('utils');
 
-    var savepath = "screenshot.png";
-    var url = args[0];
-    if(args.length >= 2){
-      savepath = args[1];
-    }
+var args = casper.cli.args;
+if(args.length < 1){
+  //사용법 표시
+  casper.echo("USES:");
+  casper.echo("shot-tool URL [savepath]");
+  casper.exit();
+}
 
-    //CasperJS 처리 개시
-    casper.start(); // 빈 페이지 준비
-    casper.viewport(1024, 768);
-    casper.open(url);
-    casper.then(function(){
-      this.capture(savepath, {
-        top:0, left:0, width:1024, height:768
-      });
-    });
+var savepath = "screenshot.png";
+var url = args[0];
+if(args.length >= 2){
+  savepath = args[1];
+}
 
-    //실행
-    casper.run(); //실제 실행
+//CasperJS 처리 개시
+casper.start(); // 빈 페이지 준비
+casper.viewport(1024, 768);
+casper.open(url);
+casper.then(function(){
+  this.capture(savepath, {
+    top:0, left:0, width:1024, height:768
+  });
+});
 
+//실행
+casper.run(); //실제 실행
+
+```
 
 `casperjs yourFile.js http://www.naver.com screen_exam.png`
 
