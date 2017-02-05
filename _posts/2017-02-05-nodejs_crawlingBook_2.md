@@ -32,6 +32,8 @@ CasperJS는 아까 말한대로 PhantomJS 를 쉽게 사용하기 위한 라이�
 
 설치는 그냥 개별적으로 진행하고, 간단히 하나씩 해보자.
 
+``` javascript
+
     // 웹사이트 타이틀을 표시하는 프로그램
 
     var TARGET_URL = 'http://jpub.tistory.com';
@@ -47,6 +49,7 @@ CasperJS는 아까 말한대로 PhantomJS 를 쉽게 사용하기 위한 라이�
 
     casper.run(); //실제 실행
 
+```
 
 위 프로그램은 웹사이트 타이틀을 가져오는 것이다. 실행은 node로 하는 것이 아니라, casperjs 파일이름 으로 실행한다.
 
@@ -58,6 +61,8 @@ CasperJS는 아까 말한대로 PhantomJS 를 쉽게 사용하기 위한 라이�
 만약 CasperJS의 런타임 정보를 좀더 알고싶으면 실행 시 `-verbose`나 `-log-level=debug`라고 하면 색상과 함께 정보가 표시 된다.
 
 간단히 해봤으니 이번엔 캡처 프로그램을 만들어보자.
+
+``` javascript
 
     // 스크린샷
 
@@ -79,11 +84,15 @@ CasperJS는 아까 말한대로 PhantomJS 를 쉽게 사용하기 위한 라이�
     //실행
     casper.run(); //실제 실행
 
+```
+
 아마 실행을 하면, 이미지 파일이 만들어 질 것이다.
 
 위 타이틀을 가져오는 프로그램과 코드차이를 보자. open을 쓰고 then이라는 메소드로 연결해 주었다는 점을 보면 어떤 처리로 이어지는지 이해하면 될 것이다.
 
 그럼 이어서 이미지 공유 사이트인 플리커(Flickr)에서 고양이 사진을 한번 스크린샷으로 저장해보자.
+
+``` javascript
 
     // 스크린샷 (Flickr)
 
@@ -115,6 +124,8 @@ CasperJS는 아까 말한대로 PhantomJS 를 쉽게 사용하기 위한 라이�
     //실행
     casper.run(); //실제 실행
 
+```
+
 다음과 같다. `UserAgent`는 잠시 후에 다시 설명하도록 하고, **CasperJS 의 흐름** 을 한번 정리해보자.
 
 CasperJS는 `start()` `run()` 메소드 사이에 순서대로 실행하고자 하는 처리를 `then()` 메소드를 사용하여 지정하는 식으로 작성하면 된다. 물론 비동기 처리가 기본이다. 그러나 `then()` 메소드를 사용하면 다음 메소드로 넘어가지 않으니, 동기 수행이 쉽게 이루어진다.
@@ -129,6 +140,8 @@ CasperJS는 `start()` `run()` 메소드 사이에 순서대로 실행하고자 �
 
 그럼 바로 모바일 버전에 대해 여는 것을 만들어 보자.
 
+
+``` javascript
     // 스크린샷 (iPhone 모드)
 
     var TARGET_URL = "http://jpub.tistory.com";
@@ -155,6 +168,8 @@ CasperJS는 `start()` `run()` 메소드 사이에 순서대로 실행하고자 �
 
     //실행
     casper.run(); //실제 실행
+
+```
 
 아마 스크린샷 이미지를 보면, UI가 좀 달라졌다는 것을 알 수 있을 것이다.
 
@@ -211,10 +226,13 @@ casper.run(); //실제 실행
 
 그러면 조금 더 나아가서, 리눅스(CentOS)나 MAC OS X에서는 다음과 같이 셸 스크립트를 만들어 더 쉽게 사용할 수가 있다.
 
+``` shell
+
     #!/bin/sh
     SCRIPT_DIR="$(dirname "$0")"
     /usr/local/bin/casperjs $SCRIPT_DIR/yourFile.js $*
 
+```
 
 
 와 같이 하고 실행은 `sh shot-tool.sh http://google.com` 정도가 될 것이다.
