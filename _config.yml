@@ -24,10 +24,7 @@ url: "https://koocci.github.io" # the base hostname & protocol for your site
 baseurl: ""
 
 markdown: kramdown
-
-kramdown:
-  input: GFM
-  syntax_highlighter: rouge
+highlighter: rouge
 
 #fill in disqus shortname to use disqus
 disqus: lazyeffect
