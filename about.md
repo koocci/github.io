@@ -7,7 +7,7 @@ permalink: /Portfolio/
 ## 구진현(Koo jinhyun)
   * Koocci (LazyEffect)
 
-## 경력(Experience)
+### 경력(Experience)
   * 2015.
     - Apptive 소속 developer
     - 멋쟁이 사자처럼 3기
@@ -20,7 +20,7 @@ permalink: /Portfolio/
     - SQLD 자격증 취득
     - 중개박사(VOS) 팀 developer (진행중)
 
-## 프로젝트(Project)
+### 프로젝트(Project)
   * 2015.
     - FPGA 전자 시계 제작
     - Diet Recipe 어플 제작
@@ -50,15 +50,15 @@ permalink: /Portfolio/
     - 라즈베리파이를 이용한 AI 스피커 개발 (진행중)
       + python
 
-## 기술(Techincal Skills)
+### 기술(Techincal Skills)
   - C, C++
   - javascript, Node.js, Express, AngularJS
   - phonegap, iOnic
   - MySQL, python, AWS
 
-## 학력(Education)
+### 학력(Education)
   * 2011.
     - 부산대학교 정보컴퓨터공학부 재학
 
-## E-MAIL
+### E-MAIL
   * dgmsky1@gmail.com
