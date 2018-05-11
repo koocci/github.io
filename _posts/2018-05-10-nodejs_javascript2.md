@@ -42,8 +42,6 @@ tags: [Nodejs, javascript, 면접]
     3. 렌더 트리를 레이아웃한다.
     4. 렌더 트리를 그린다.
 
-
-
 [출처 : https://code.i-harness.com/ko/q/1b656e](https://code.i-harness.com/ko/q/1b656e)
 
 2. CSS의 경우, 병렬적으로 DOM 렌더링과 같이 렌더링된다.
@@ -71,7 +69,7 @@ javascript는 소스를 한번 `파싱`한 후 한줄씩 런타임으로 진행�
 
 **파싱** 은 일련의 문자열을 의미있는 토큰(token)으로 분해하고 이들로 이루어진 파스 트리(parse tree)를 만드는 과정이다.
 
-**런타임** 이라 함은, 컴퓨터 프로그램이 실행되고 있는 동안의 동작을 말한다.
+**런타임** 이라 함은, 프로그램이 실행되고 있는 곳을 말한다.
 
 이때, 파싱과 런타임은 `실행컨텍스트` 단위로 실행된다.
 
@@ -85,6 +83,18 @@ javascript는 소스를 한번 `파싱`한 후 한줄씩 런타임으로 진행�
 단순히 전역 변수로 선언되거나 const, let으로 선언된 변수는 오류가 나오겠지만, 위 두가지는 선언이 위로 올라간다면 출력에 undefined가 뜬다는 것을 알고 있자.
 단, 함수를 실행하면 오류가 난다.
 
+그럼, 런타임에서 어떻게 되는지 보도록 하자.
+
+Javascript에 **콜스택** 에 대한 설명은 지난 포스팅에서 진행했다.
+
+1. 먼저, Main (Chrome에서는 anonymous 함수로 나온다.) 이 스택에 들어간다. ( **전역 실행컨텍스트** )
+2. 그리고 Main 내에, 첫번째 실행컨텍스트가 나오면, 해당 컨텍스트를 **콜 스택** 에 넣기 시작한다. (DFS와 비슷하게 내부에 또다시 있으면 계속해서 들어간다.)
+3. 그리고 더 이상 새로운 컨텍스트가 없을 때, 차례로 Pop이 되며 실행이 된다.
+4. 이 때, setTimeout과 같이 **비동기 처리** 가 요구되는 요청이 들어오면, 이것은 **CallBack** 과 함께 **백그라운드** 로 넘어간다. setTimeout의 경우 3초를 경과시킨다고 할 때, Background에서 3초를 경과후 **Task Queue** 에 CallBack을 전달한다.
+5. 그리고, Main에서 첫번째 실행컨텍스트가 끝나고 두번째 실행컨텍스트가 있다면 이 역시, 앞서 첫번 째 실행컨텍스트와 같이 진행된다.
+6. 마지막으로 더이상 Call Stack에 들어있는 정보가 없으면, (Main에서 실행할 수 있는 컨텍스트가 더이상 없다면) Task Queue에 있던 것을 **Event Loop** 가 하나씩 데리고 와서 Call Stack에 넣어 실행시킨다.
+
+이는 브라우저 환경에서 실행됬을 때의 실행 과정이다. 따라서, Node js에서의 실행과정은 다를 수 있으니, 이는 다음 포스팅에서 하도록 하겠다.
 
 ---
 
@@ -100,8 +110,12 @@ HTTP 통신은 어떻게 이루어 질까.
 
 HTTPs 는 뒤에 Secure을 붙이 보안이 강화된 규약이 된다.
 
-HTTP에서 요청은 4가지 형식이 있는데 다음과 같다.
+HTTP에서 요청의 종류는 많은데 그중 4개만 뽑아보면 다음과 같다.
+
 [출처 : https://joshua1988.github.io/web-development/web-protocols/](https://joshua1988.github.io/web-development/web-protocols/)
+
+[출처 : https://developer.mozilla.org/ko/docs/Web/HTTP/Methods](https://developer.mozilla.org/ko/docs/Web/HTTP/Methods)
+
 
 1. GET : 문서를 요청. 서버가 클라이언트에 상태 정보와 복제된 문서를 보냄으로써 응답을 함. (조회)
 2. HEAD : 상태 정보를 요청. GET 과 동일한 형태로 응답을 하지만, 문서를 복제하지는 않는다.
