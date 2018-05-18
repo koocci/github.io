@@ -173,8 +173,6 @@ A에서 B를 호출했다고 하자, 그럴때 `B가 바로 제어권을 다시 
 
 그럼 전체적으로 정리를 해보겠다.
 
-첫번째로 기본적인 순서를 알아보자.
-
 1. 흔히, URL을 이용해 우리는 서버에 원하는 **요청** 을 하게 된다.
 2. **REST API** 라는 네트워크 아키텍쳐를 사용했다고 할 때, 원하는 **행위(Verb)** 즉, HTTP Method에 따라, URI에 **표현(Representations)** 된 **자원(Resource)** 를 이용해, 만들어 둔 Routing이 시작되고, 담당하는 함수를 찾아 실행이 되기 시작한다. (해당사항도 **Event Loop** 가 실행한다. )
 3. 요청은 여러개가 들어올 수 있는데, 이는 **Socket Connection** 이라고 하며, Multiplexing으로 실행이 된다. 즉, 여러 개의 socket이 동시에 연결되어 있는 상태에서 하나의 Thread( **Event Loop** )는 어느 socket으로부터 메시지가 들어오는지 보다가, socket에서 메시지가 들어오면, 그 메시지를 꺼내 받아서 처리한다.
@@ -225,6 +223,7 @@ Thread Pool 관련 작업, 파일 처리 관련 작업을 하는 **libeio** 와,
 하여튼 위 내용을 설명해 달라는 면접 질문을 받은 적 있다. 상당히 난이도가 있는 내용이니, 정확히 알아두어야 한다.
 
 [출처 : http://sjh836.tistory.com/149](http://sjh836.tistory.com/149)
+
 [출처 : http://bcho.tistory.com/881](http://bcho.tistory.com/881)
 
 앞 출처를 참고하면 그림과 함께 볼 수 있다.
